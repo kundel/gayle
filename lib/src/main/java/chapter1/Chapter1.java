@@ -7,6 +7,7 @@ import java.util.Map;
 public class Chapter1 {
   public Chapter1() {}
 
+  // emoji, utf-16 safe
   public static boolean isUnique_1(String input) {
     if (input == null) {
       throw new IllegalArgumentException("empty input string");
@@ -26,6 +27,7 @@ public class Chapter1 {
     return !hasDupe;
   }
 
+  // emoji, utf-16 safe
   public static boolean isUnique_2(String input) {
     if (input == null) {
       throw new IllegalArgumentException("empty input string");
@@ -42,9 +44,12 @@ public class Chapter1 {
     return !hasDupe;
   }
 
-  public static boolean isPermutation(String one, String two) {
+  public static boolean isPermutation_1(String one, String two) {
     if (one == null || two == null) {
       throw new IllegalArgumentException("empty input string");
+    }
+    if (one.length() != two.length()) {
+      return false;
     }
     Map<Integer, Integer> oneIdx = index(one);
     Map<Integer, Integer> twoIdx = index(two);
@@ -68,5 +73,29 @@ public class Chapter1 {
       offset += Character.charCount(codepoint);
     }
     return idx;
+  }
+
+  public static boolean isPermutation_2(String one, String two) {
+    if (one == null || two == null) {
+      throw new IllegalArgumentException("empty input string");
+    }
+    if (one.length() != two.length()) {
+      return false;
+    }
+    int[] codePoints = new int[Integer.MAX_VALUE];
+    for (int offset = 0; offset < one.length(); ) {
+      final int codepoint = one.codePointAt(offset);
+      codePoints[offset]++;
+      offset += Character.charCount(codepoint);
+    }
+    for (int offset = 0; offset < two.length(); ) {
+      final int codepoint = two.codePointAt(offset);
+      codePoints[offset]--;
+      if (codePoints[offset] < 0) {
+        return false;
+      }
+      offset += Character.charCount(codepoint);
+    }
+    return true;
   }
 }
