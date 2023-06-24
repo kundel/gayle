@@ -1,8 +1,11 @@
 package chapter1;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Chapter1 {
   public Chapter1() {}
@@ -64,7 +67,7 @@ public class Chapter1 {
   }
 
   private static Map<Integer, Integer> index(String input) {
-    HashMap<Integer, Integer> idx = new HashMap<>();
+    TreeMap<Integer, Integer> idx = new TreeMap<>();
     final int length = input.length();
     for (int offset = 0; offset < length; ) {
       final int codepoint = input.codePointAt(offset);
@@ -75,6 +78,7 @@ public class Chapter1 {
     return idx;
   }
 
+  @Deprecated
   public static boolean isPermutation_2(String one, String two) {
     if (one == null || two == null) {
       throw new IllegalArgumentException("empty input string");
@@ -82,7 +86,10 @@ public class Chapter1 {
     if (one.length() != two.length()) {
       return false;
     }
-    int[] codePoints = new int[Integer.MAX_VALUE];
+    int[] codePoints =
+        new int
+            [Integer
+                .MAX_VALUE]; // uses too much memory for all of the codepoints, need sparse array
     for (int offset = 0; offset < one.length(); ) {
       final int codepoint = one.codePointAt(offset);
       codePoints[offset]++;
@@ -97,5 +104,24 @@ public class Chapter1 {
       offset += Character.charCount(codepoint);
     }
     return true;
+  }
+
+  public static String urlify(String url) {
+    // canonical way:
+    // return URLEncoder.encode(url, StandardCharsets.UTF_8);
+    if (url == null) throw new IllegalArgumentException("null input");
+    StringBuilder out = new StringBuilder();
+    char[] chars = url.toCharArray();
+    char space = " ".toCharArray()[0];
+    String urlEncodedSpace = "%20";
+    for (int i = 0; i < chars.length; i++) {
+      char c = chars[i];
+      if (c == space) {
+        out.append(urlEncodedSpace);
+      } else {
+        out.append(c);
+      }
+    }
+    return out.toString();
   }
 }

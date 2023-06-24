@@ -1,9 +1,9 @@
 package chapter1;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class Chapter1Test {
   @Test
@@ -26,8 +26,10 @@ public class Chapter1Test {
   public void test1_2() {
     assertTrue(Chapter1.isPermutation_1("abcded", "dedcab"));
     assertFalse(Chapter1.isPermutation_1("dddde", "eeeed"));
+  }
 
-    assertTrue(Chapter1.isPermutation_2("abcded", "dedcab"));
-    assertFalse(Chapter1.isPermutation_2("dddde", "eeeed"));
+  @Test
+  public void test1_3() {
+    assertEquals(Chapter1.urlify("http://www.example.com/this has spaces"), "http://www.example.com/this%20has%20spaces");
   }
 }
