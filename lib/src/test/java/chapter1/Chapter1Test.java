@@ -1,9 +1,8 @@
 package chapter1;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 public class Chapter1Test {
   @Test
@@ -30,7 +29,9 @@ public class Chapter1Test {
 
   @Test
   public void test1_3() {
-    assertEquals(Chapter1.urlify("http://www.example.com/this has spaces"), "http://www.example.com/this%20has%20spaces");
+    assertEquals(
+        Chapter1.urlify("http://www.example.com/this has spaces"),
+        "http://www.example.com/this%20has%20spaces");
   }
 
   @Test
@@ -47,4 +48,9 @@ public class Chapter1Test {
     assertFalse(Chapter1.isOneAway("pale", "bake"));
   }
 
+  @Test
+  public void test1_6() {
+    System.out.println(Chapter1.compressString("aabcccccaaa"));
+    assertEquals(Chapter1.compressString("aabcccccaaa"), "a2b1c5a3");
+  }
 }

@@ -140,4 +140,69 @@ public class Chapter1 {
     }
     return diff < 2;
   }
+
+  static class sIdx {
+    char c;
+    int n;
+
+    public sIdx(char character, int num) {
+      c = character;
+      n = num;
+    }
+
+    public char[] out() {
+      char[] out = new char[2];
+      out[0] = c;
+      out[1] = Character.forDigit(n, 10);
+      return out;
+    }
+
+    @Override
+    public String toString() {
+      return new String(out());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+      sIdx sIdx = (sIdx) o;
+      return c == sIdx.c && n == sIdx.n;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(c, n);
+    }
+  }
+
+  public static String compressString(String str) {
+    if (str == null) {
+      return "";
+    }
+    List<sIdx> compress = new ArrayList<>(str.length());
+    int count = 0;
+    char lastchar = '\0';
+    char[] chars = str.toCharArray();
+    for (int i = 0; i < chars.length; i++) {
+      char c = chars[i];
+      if (lastchar == c) {
+        ++count;
+        if (chars.length - 1 == i) {
+          compress.add(new sIdx(lastchar, ++count));
+        }
+      } else if (i > 0 && lastchar != c) {
+        compress.add(new sIdx(lastchar, ++count));
+        count = 0;
+      } else {
+        int ii = 5;
+      }
+      lastchar = c;
+    }
+    StringBuilder cmp = new StringBuilder();
+    for (sIdx s : compress) {
+      cmp.append(s.out());
+    }
+    return cmp.toString();
+  }
 }
