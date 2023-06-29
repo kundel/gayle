@@ -32,4 +32,19 @@ public class Chapter1Test {
   public void test1_3() {
     assertEquals(Chapter1.urlify("http://www.example.com/this has spaces"), "http://www.example.com/this%20has%20spaces");
   }
+
+  @Test
+  public void test1_4() {
+    assertTrue(Chapter1.isPalendrome("Tact Coa", "taco cat"));
+    assertTrue(Chapter1.isPalendrome("Tact Coa", "atco cta"));
+  }
+
+  @Test
+  public void test1_5() {
+    assertTrue(Chapter1.isOneAway("pale", "ple"));
+    assertTrue(Chapter1.isOneAway("pales", "pale"));
+    assertTrue(Chapter1.isOneAway("pale", "bale"));
+    assertFalse(Chapter1.isOneAway("pale", "bake"));
+  }
+
 }

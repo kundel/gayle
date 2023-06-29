@@ -1,11 +1,6 @@
 package chapter1;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Chapter1 {
   public Chapter1() {}
@@ -123,5 +118,26 @@ public class Chapter1 {
       }
     }
     return out.toString();
+  }
+
+  public static boolean isPalendrome(String str1, String str2) {
+    return isPermutation_1(str1.toLowerCase(), str2.toLowerCase());
+  }
+
+  public static boolean isOneAway(String str1, String str2) {
+    Map<Integer, Integer> oneIdx = index(str1);
+    Map<Integer, Integer> twoIdx = index(str2);
+    int diff = 0;
+    for (Map.Entry<Integer, Integer> e : twoIdx.entrySet()) {
+      int key = e.getKey();
+      int value = e.getValue();
+      Integer oneVal = oneIdx.get(key);
+      if (!oneIdx.containsKey(key)) {
+        diff++;
+      } else if (value != oneVal) {
+        diff++;
+      }
+    }
+    return diff < 2;
   }
 }
