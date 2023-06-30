@@ -2,6 +2,8 @@ package chapter1;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 
 public class Chapter1Test {
@@ -50,7 +52,61 @@ public class Chapter1Test {
 
   @Test
   public void test1_6() {
-    System.out.println(Chapter1.compressString("aabcccccaaa"));
     assertEquals(Chapter1.compressString("aabcccccaaa"), "a2b1c5a3");
+  }
+
+  @Test
+  public void test1_7() {
+    int[][] image = {
+      IntStream.range(1, 10).toArray(),
+      IntStream.range(1, 10).toArray(),
+      IntStream.range(1, 10).toArray(),
+      IntStream.range(1, 10).toArray(),
+      IntStream.range(1, 10).toArray(),
+      IntStream.range(1, 10).toArray(),
+      IntStream.range(1, 10).toArray(),
+      IntStream.range(1, 10).toArray(),
+      IntStream.range(1, 10).toArray()
+    };
+    int[][] expected = {
+      IntStream.of(1, 1, 1, 1, 1, 1, 1, 1, 1).toArray(),
+      IntStream.of(2, 2, 2, 2, 2, 2, 2, 2, 2).toArray(),
+      IntStream.of(3, 3, 3, 3, 3, 3, 3, 3, 3).toArray(),
+      IntStream.of(4, 4, 4, 4, 4, 4, 4, 4, 4).toArray(),
+      IntStream.of(5, 5, 5, 5, 5, 5, 5, 5, 5).toArray(),
+      IntStream.of(6, 6, 6, 6, 6, 6, 6, 6, 6).toArray(),
+      IntStream.of(7, 7, 7, 7, 7, 7, 7, 7, 7).toArray(),
+      IntStream.of(8, 8, 8, 8, 8, 8, 8, 8, 8).toArray(),
+      IntStream.of(9, 9, 9, 9, 9, 9, 9, 9, 9).toArray(),
+    };
+    assertTrue(Arrays.deepEquals(Chapter1.rotateMatrix(image), expected));
+  }
+
+  @Test
+  public void test1_8() {
+    int[][] input = {
+      IntStream.of(1, 0, 1, 1, 1, 1, 1, 1, 1).toArray(),
+      IntStream.of(2, 2, 2, 2, 2, 2, 2, 2, 2).toArray(),
+      IntStream.of(3, 3, 3, 0, 3, 3, 3, 3, 3).toArray(),
+      IntStream.of(4, 4, 4, 4, 4, 4, 4, 4, 4).toArray(),
+      IntStream.of(5, 5, 5, 5, 5, 0, 5, 5, 5).toArray(),
+      IntStream.of(6, 6, 6, 6, 6, 6, 6, 6, 6).toArray(),
+      IntStream.of(7, 7, 7, 7, 7, 7, 7, 0, 7).toArray(),
+      IntStream.of(8, 8, 8, 8, 8, 8, 8, 8, 8).toArray(),
+      IntStream.of(9, 9, 9, 9, 9, 9, 9, 9, 0).toArray(),
+    };
+    int[][] expected = {
+      IntStream.of(0, 0, 0, 0, 0, 0, 0, 0, 0).toArray(),
+      IntStream.of(2, 0, 2, 0, 2, 0, 2, 0, 0).toArray(),
+      IntStream.of(0, 0, 0, 0, 0, 0, 0, 0, 0).toArray(),
+      IntStream.of(4, 0, 4, 0, 4, 0, 4, 0, 0).toArray(),
+      IntStream.of(0, 0, 0, 0, 0, 0, 0, 0, 0).toArray(),
+      IntStream.of(6, 0, 6, 0, 6, 0, 6, 0, 0).toArray(),
+      IntStream.of(0, 0, 0, 0, 0, 0, 0, 0, 0).toArray(),
+      IntStream.of(8, 0, 8, 0, 8, 0, 8, 0, 0).toArray(),
+      IntStream.of(0, 0, 0, 0, 0, 0, 0, 0, 0).toArray(),
+    };
+    int[][] output = Chapter1.zeroMatrix(input);
+    assertTrue(Arrays.deepEquals(output, expected));
   }
 }

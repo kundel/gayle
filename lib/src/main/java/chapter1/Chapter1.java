@@ -205,4 +205,62 @@ public class Chapter1 {
     }
     return cmp.toString();
   }
+
+  public static int[][] rotateMatrix(int[][] image) {
+    /*
+    123456789
+    123456789
+    123456789
+    123456789
+    123456789
+    123456789
+    123456789
+    123456789
+    123456789
+    123456789
+    --
+    111111111
+    222222222
+    333333333
+    444444444
+    555555555
+    666666666
+    777777777
+    888888888
+    999999999
+    */
+    if (image.length != image[0].length) {
+      throw new IllegalArgumentException("not square");
+    }
+
+    int[][] rotated = new int[image.length][image.length];
+    for (int i = 0; i < image.length; i++) {
+      for (int j = 0; j < image.length; j++) {
+        rotated[j][i] = image[i][j];
+      }
+    }
+
+    return rotated;
+  }
+
+  public static int[][] zeroMatrix(int[][] matrix) {
+    Set<Integer> cols = new TreeSet<>();
+    boolean skip = false;
+    for (int i = 0; i < matrix.length; i++) {
+      for (int j = 0; j < matrix.length; j++) {
+        if (matrix[i][j] == 0 && !skip) {
+          Arrays.fill(matrix[i], 0);
+          cols.add(j);
+          skip = true;
+        }
+      }
+      skip = false;
+    }
+    for (int i : cols) {
+      for (int j = 0; j < matrix.length; j++) {
+        matrix[j][i] = 0;
+      }
+    }
+    return matrix;
+  }
 }
